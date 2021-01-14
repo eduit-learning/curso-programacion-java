@@ -28,4 +28,15 @@ public class Empleado extends Persona {
     public void descansar(){
         System.out.println("Voy a comer");
     }
+    
+    public boolean Comparar(Empleado otro){
+        return this.idEmpleado.equals(otro.idEmpleado);
+        //return e3.idEmpleado.equals(otro.idEmpleado);
+        //return emp1.idEmpleado.equals(emp2.idEmpleado);
+        
+    }
+    
+    public boolean Comparar(Empleado emp1, Empleado emp2){
+        return emp1.idEmpleado.equals(emp2.idEmpleado);
+    }
 }

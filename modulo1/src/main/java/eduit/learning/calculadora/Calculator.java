@@ -28,7 +28,7 @@ public class Calculator {
                 System.out.println("Por favor capture el número 1");
 
                 if (getDouble(scanner.nextLine(), num1) == false) {
-                    System.out.println("El valor porporcionado no es numérico. Deseas intentarlo de nuevo (Y/N).");
+                    System.out.println("El valor porporcionado no es numérico. Deseas intentarlo de nuevo (S/N).");
                     if (scanner.nextLine().toLowerCase().equals("s") == false) {
                         requestNumbers = false;
                     }
@@ -70,10 +70,11 @@ public class Calculator {
                 }
             }
 
-            System.out.println("Desea ejecutar de nuevo. ¿Y/N?");
+            System.out.println("Desea ejecutar de nuevo. ¿S/N?");
             result = scanner.nextLine();
 
         } while (result.toLowerCase().equals("s") == true);
+        //} while (result.toLowerCase() == "s");
     }
 
     public static boolean getDouble(String textInput, Holder<Double> output) {
