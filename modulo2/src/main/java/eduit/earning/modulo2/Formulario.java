@@ -5,38 +5,6 @@ import javax.swing.JOptionPane;
 public class Formulario extends javax.swing.JFrame {
     public Formulario() {
         initComponents();
-        InitializeComponents();
-    }
-
-    private void InitializeComponents() {
-        txtNombre.setEnabled(false);
-        txtApellidos.setEnabled(false);
-        txtDepartamento.setEnabled(false);
-        txtEmail.setEnabled(false);
-        txtObservaciones.setEnabled(false);
-
-        spnEdad.setEnabled(false);
-        rbnHombre.setEnabled(false);
-        rbnMujer.setEnabled(false);
-        rbnOtro.setEnabled(false);
-
-        btnGuardar.setVisible(false);
-        btnCancelar.setVisible(false);
-        btnNuevo.setVisible(true);
-        btnModificar.setVisible(true);
-        btnEliminar.setVisible(true);
-
-        txtNombre.setText("");
-        txtApellidos.setText("");
-        txtDepartamento.setText("");
-        txtEmail.setText("");
-        txtObservaciones.setText("");
-
-        spnEdad.setValue(18);
-        btgGeneros.clearSelection();
-        //rbnHombre.setSelected(false);
-        //rbnMujer.setSelected(false);
-        //rbnOtro.setSelected(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -95,14 +63,17 @@ public class Formulario extends javax.swing.JFrame {
         btgGeneros.add(rbnHombre);
         rbnHombre.setText("Hombre");
         rbnHombre.setToolTipText("Hombre");
+        rbnHombre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btgGeneros.add(rbnMujer);
         rbnMujer.setText("Mujer");
         rbnMujer.setToolTipText("Mujer");
+        rbnMujer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btgGeneros.add(rbnOtro);
         rbnOtro.setText("Otro");
         rbnOtro.setToolTipText("Otro");
+        rbnOtro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pnlGenerosLayout = new javax.swing.GroupLayout(pnlGeneros);
         pnlGeneros.setLayout(pnlGenerosLayout);
@@ -152,11 +123,6 @@ public class Formulario extends javax.swing.JFrame {
 
         btnNuevo.setText("Nuevo");
         btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
 
         btnModificar.setText("Modificar");
         btnModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -203,7 +169,9 @@ public class Formulario extends javax.swing.JFrame {
                                     .addComponent(lblDepartamento))
                                 .addGap(18, 18, 18)
                                 .addComponent(pnlGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44))))
                     .addComponent(lblObservaciones)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
@@ -243,7 +211,7 @@ public class Formulario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblObservaciones)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,7 +222,7 @@ public class Formulario extends javax.swing.JFrame {
                     .addComponent(btnEliminar)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         lblNombre.getAccessibleContext().setAccessibleName("lblNombre");
@@ -278,33 +246,12 @@ public class Formulario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        btnNuevo.setVisible(false);
-        btnModificar.setVisible(false);
-        btnEliminar.setVisible(false);
-
-        txtNombre.setEnabled(true);
-        txtApellidos.setEnabled(true);
-        txtDepartamento.setEnabled(true);
-        txtEmail.setEnabled(true);
-        txtObservaciones.setEnabled(true);
-
-        spnEdad.setEnabled(true);
-        rbnHombre.setEnabled(true);
-        rbnMujer.setEnabled(true);
-        rbnOtro.setEnabled(true);
-
-        btnGuardar.setVisible(true);
-        btnCancelar.setVisible(true);
-
-    }//GEN-LAST:event_btnNuevoActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         var result = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea cancelar la operación?", "Cancelar operación",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
         if (result == JOptionPane.YES_OPTION) {
-            InitializeComponents();
+            //InitializeComponents();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -341,12 +288,12 @@ public class Formulario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup btgGeneros;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnNuevo;
+    public javax.swing.ButtonGroup btgGeneros;
+    public javax.swing.JButton btnCancelar;
+    public javax.swing.JButton btnEliminar;
+    public javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnModificar;
+    public javax.swing.JButton btnNuevo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblDepartamento;
@@ -355,14 +302,14 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblObservaciones;
     private javax.swing.JPanel pnlGeneros;
-    private javax.swing.JRadioButton rbnHombre;
-    private javax.swing.JRadioButton rbnMujer;
-    private javax.swing.JRadioButton rbnOtro;
-    private javax.swing.JSpinner spnEdad;
-    private javax.swing.JTextField txtApellidos;
-    private javax.swing.JTextField txtDepartamento;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextArea txtObservaciones;
+    public javax.swing.JRadioButton rbnHombre;
+    public javax.swing.JRadioButton rbnMujer;
+    public javax.swing.JRadioButton rbnOtro;
+    public javax.swing.JSpinner spnEdad;
+    public javax.swing.JTextField txtApellidos;
+    public javax.swing.JTextField txtDepartamento;
+    public javax.swing.JTextField txtEmail;
+    public javax.swing.JTextField txtNombre;
+    public javax.swing.JTextArea txtObservaciones;
     // End of variables declaration//GEN-END:variables
 }
