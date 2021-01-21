@@ -5,19 +5,28 @@
  */
 package eduit.earning.modulo2.viewmodel;
 
+import com.google.gson.Gson;
 import eduit.earning.modulo2.Formulario;
 import eduit.learning.modulo2.model.Empleado;
+import eduit.learning.modulo2.model.Generos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author abraham
  */
 public class FormularioViewModel {
-    private Formulario view;
     
-    public FormularioViewModel(Formulario view){
+    private Formulario view;
+    private List<Empleado> listaEmpleados;
+    
+    public FormularioViewModel(Formulario view) {
         this.view = view;
         
         InicializarEventos();
@@ -26,10 +35,12 @@ public class FormularioViewModel {
         HabilitarDeshabilitarComponentes(false);
         MostrarOcultarBotonesPrincipales(true);
         MostrarOcultarBotonesSecundarios(false);
+        
+        listaEmpleados = new ArrayList();
     }
     
-    private void InicializarEventos(){
-        this.view.btnNuevo.addActionListener(new ActionListener(){
+    private void InicializarEventos() {
+        this.view.btnNuevo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AccionNuevo();
@@ -37,7 +48,7 @@ public class FormularioViewModel {
             
         });
         
-        this.view.btnModificar.addActionListener(new ActionListener(){
+        this.view.btnModificar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AccionModificar();
@@ -45,7 +56,7 @@ public class FormularioViewModel {
             
         });
         
-        this.view.btnEliminar.addActionListener(new ActionListener(){
+        this.view.btnEliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AccionEliminar();
@@ -53,7 +64,7 @@ public class FormularioViewModel {
             
         });
         
-        this.view.btnGuardar.addActionListener(new ActionListener(){
+        this.view.btnGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AccionGuardar();
@@ -61,7 +72,7 @@ public class FormularioViewModel {
             
         });
         
-        this.view.btnCancelar.addActionListener(new ActionListener(){
+        this.view.btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AccionCancelar();
@@ -70,58 +81,108 @@ public class FormularioViewModel {
         });
     }
     
-    private void AccionNuevo(){
+    private void AccionNuevo() {
+        LimpiarComponentes();
+        MostrarOcultarBotonesPrincipales(false);
+        MostrarOcultarBotonesSecundarios(true);
+        HabilitarDeshabilitarComponentes(true);
+    }
+    
+    private void AccionModificar() {
         
     }
     
-    private void AccionModificar(){
+    private void AccionEliminar() {
         
     }
     
-    private void AccionEliminar(){
+    private void AccionGuardar() {
+        Empleado emp = new Empleado();
+        
+        emp.setNombre(this.view.txtNombre.getText());
+        emp.setApellidos(this.view.txtApellidos.getText());
+        emp.setDepartamento(this.view.txtDepartamento.getText());
+        emp.setEmail(this.view.txtEmail.getText());
+        emp.setObservaciones(this.view.txtObservaciones.getText());
+        emp.setGenero(this.view.rbnHombre.isSelected() == true ? Generos.Hombre
+                : this.view.rbnMujer.isSelected() == true ? Generos.Mujer
+                : Generos.Otro);
+        emp.setEdad(Byte.parseByte(this.view.spnEdad.getValue().toString()));
+        
+        this.listaEmpleados.add(emp);
+        
+        boolean guardadoExitoso = this.GuardarEnArchivo();
+        if (guardadoExitoso == true) {
+            LimpiarComponentes();
+            MostrarOcultarBotonesPrincipales(true);
+            MostrarOcultarBotonesSecundarios(false);
+            HabilitarDeshabilitarComponentes(false);
+        }
         
     }
     
-    private void AccionGuardar(){
+    private void AccionCancelar() {
+        var result = JOptionPane.showConfirmDialog(this.view, "¿Está seguro que desea cancelar la operación?", "Cancelar operación",
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         
+        if (result == JOptionPane.YES_OPTION) {
+            LimpiarComponentes();
+            MostrarOcultarBotonesPrincipales(true);
+            MostrarOcultarBotonesSecundarios(false);
+            HabilitarDeshabilitarComponentes(false);
+        }
     }
     
-    private void AccionCancelar(){
-        
-    }
-    
-    private void MostrarOcultarBotonesPrincipales(boolean estanVisibles){
+    private void MostrarOcultarBotonesPrincipales(boolean estanVisibles) {
         this.view.btnNuevo.setVisible(estanVisibles);
         this.view.btnModificar.setVisible(estanVisibles);
         this.view.btnEliminar.setVisible(estanVisibles);
     }
     
-    private void MostrarOcultarBotonesSecundarios(boolean estanVisibles){
+    private void MostrarOcultarBotonesSecundarios(boolean estanVisibles) {
         this.view.btnGuardar.setVisible(estanVisibles);
         this.view.btnCancelar.setVisible(estanVisibles);
     }
     
-    private void HabilitarDeshabilitarComponentes(boolean estanHabilitados){
+    private void HabilitarDeshabilitarComponentes(boolean estanHabilitados) {
         this.view.txtNombre.setEnabled(estanHabilitados);
         this.view.txtApellidos.setEnabled(estanHabilitados);
         this.view.txtDepartamento.setEnabled(estanHabilitados);
         this.view.txtEmail.setEnabled(estanHabilitados);
         this.view.txtObservaciones.setEnabled(estanHabilitados);
-
+        
         this.view.spnEdad.setEnabled(estanHabilitados);
         this.view.rbnHombre.setEnabled(estanHabilitados);
         this.view.rbnMujer.setEnabled(estanHabilitados);
         this.view.rbnOtro.setEnabled(estanHabilitados);
     }
     
-    private void LimpiarComponentes(){
+    private void LimpiarComponentes() {
         this.view.txtNombre.setText("");
         this.view.txtApellidos.setText("");
         this.view.txtDepartamento.setText("");
         this.view.txtEmail.setText("");
         this.view.txtObservaciones.setText("");
-
+        
         this.view.spnEdad.setValue(18);
         this.view.btgGeneros.clearSelection();
+    }
+    
+    private boolean GuardarEnArchivo() {
+        try {
+            FileWriter fw = new FileWriter("C:\\TMP\\Formulario_ListaEmpleados.txt");
+            
+            Gson gson = new Gson();
+            String listaEmpleadosJson = gson.toJson(this.listaEmpleados);
+            
+            fw.write(listaEmpleadosJson);
+            fw.close();
+            
+            return true;
+        } catch (IOException ex) {
+            var result = JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
     }
 }

@@ -1,10 +1,19 @@
 package eduit.earning.modulo2;
 
+import eduit.earning.modulo2.viewmodel.FormularioViewModel;
 import javax.swing.JOptionPane;
 
 public class Formulario extends javax.swing.JFrame {
+
     public Formulario() {
         initComponents();
+        
+        //Formulario f = new Formulario();
+        //FormularioViewModel fvm = new FormularioViewModel(f);
+
+        //Esta línea de código es equivalente a las dos líneas de código comentadas en la parte de arriba
+        FormularioViewModel fvm = new FormularioViewModel(this);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -247,12 +256,7 @@ public class Formulario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        var result = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea cancelar la operación?", "Cancelar operación",
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-        if (result == JOptionPane.YES_OPTION) {
-            //InitializeComponents();
-        }
+        
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     public static void main(String args[]) {
