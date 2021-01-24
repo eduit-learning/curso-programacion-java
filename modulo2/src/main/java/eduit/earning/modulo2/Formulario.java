@@ -1,6 +1,7 @@
 package eduit.earning.modulo2;
 
 import eduit.earning.modulo2.viewmodel.FormularioViewModel;
+import eduit.learning.modulo2.model.Empleado;
 import javax.swing.JOptionPane;
 
 public class Formulario extends javax.swing.JFrame {
@@ -43,6 +44,7 @@ public class Formulario extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstEmpleados = new javax.swing.JList<>();
 
@@ -152,8 +154,13 @@ public class Formulario extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+
         lstEmpleados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane2.setViewportView(lstEmpleados);
+
+        jScrollPane3.setViewportView(jScrollPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -196,15 +203,16 @@ public class Formulario extends javax.swing.JFrame {
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pnlGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,9 +245,9 @@ public class Formulario extends javax.swing.JFrame {
                             .addComponent(btnModificar)
                             .addComponent(btnEliminar)
                             .addComponent(btnGuardar)
-                            .addComponent(btnCancelar)))
-                    .addComponent(jScrollPane2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnCancelar))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         lblNombre.getAccessibleContext().setAccessibleName("lblNombre");
@@ -308,13 +316,14 @@ public class Formulario extends javax.swing.JFrame {
     public javax.swing.JButton btnNuevo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblDepartamento;
     private javax.swing.JLabel lblEdad;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblObservaciones;
-    public javax.swing.JList<String> lstEmpleados;
+    public javax.swing.JList<Empleado> lstEmpleados;
     private javax.swing.JPanel pnlGeneros;
     public javax.swing.JRadioButton rbnHombre;
     public javax.swing.JRadioButton rbnMujer;

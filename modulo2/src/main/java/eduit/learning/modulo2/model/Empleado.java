@@ -10,6 +10,7 @@ package eduit.learning.modulo2.model;
  * @author abraham
  */
 public class Empleado {
+
     private String nombre;
     private String apellidos;
     private String email;
@@ -17,64 +18,64 @@ public class Empleado {
     private String observaciones;
     private byte edad;
     private Generos genero;
-    
-    public Empleado(){
-        
+
+    public Empleado() {
+
     }
-    
-    public String getNombre(){
+
+    public String getNombre() {
         return this.nombre;
     }
-    
-    public String getApellidos(){
+
+    public String getApellidos() {
         return this.apellidos;
     }
-    
-    public String getEmail(){
+
+    public String getEmail() {
         return this.email;
     }
-    
-    public String getDepartamento(){
+
+    public String getDepartamento() {
         return this.departamento;
     }
-    
-    public String getObservaciones(){
+
+    public String getObservaciones() {
         return this.observaciones;
     }
-    
-    public byte getEdad(){
+
+    public byte getEdad() {
         return this.edad;
     }
-    
-    public Generos getGenero(){
+
+    public Generos getGenero() {
         return this.genero;
     }
-    
-    public void setNombre(String nombre){
+
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    public void setApellidos(String apellidos){
+
+    public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
-    
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.email = email;
     }
-    
-    public void setDepartamento(String departamento){
+
+    public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
-    
-    public void setObservaciones(String observaciones){
+
+    public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-    
-    public void setEdad(byte edad){
+
+    public void setEdad(byte edad) {
         this.edad = edad;
     }
-    
-    public void setGenero(Generos genero){
+
+    public void setGenero(Generos genero) {
         this.genero = genero;
     }
 }

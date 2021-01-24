@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import eduit.earning.modulo2.Formulario;
 import eduit.learning.modulo2.model.Empleado;
 import eduit.learning.modulo2.model.Generos;
+import eduit.learning.modulo2.utils.EmpleadoComparator;
+import eduit.learning.modulo2.utils.EmpleadoJListItemRenderer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
@@ -16,10 +18,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -27,20 +31,22 @@ import javax.swing.JOptionPane;
  */
 public class FormularioViewModel {
 
-    private Formulario view;
+    private final Formulario view;
     private List<Empleado> listaEmpleados;
+    private int selectedIndex;
 
     public FormularioViewModel(Formulario view) {
         this.view = view;
 
-        InicializarEventos();
+        this.InicializarEventos();
 
-        LimpiarComponentes();
-        HabilitarDeshabilitarComponentes(false);
-        MostrarOcultarBotonesPrincipales(true);
-        MostrarOcultarBotonesSecundarios(false);
+        this.LimpiarComponentes();
+        this.HabilitarDeshabilitarComponentes(false);
+        this.MostrarOcultarBotonesPrincipales(true);
+        this.MostrarOcultarBotonesSecundarios(false);
 
-        listaEmpleados = new ArrayList();
+        this.listaEmpleados = new ArrayList();
+        this.selectedIndex = -1;
 
         this.LeerArchivo();
         this.LlenarListaEmpleadosVista();
@@ -86,21 +92,52 @@ public class FormularioViewModel {
             }
 
         });
+
+        this.view.lstEmpleados.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                AccionMostrarDetalleEmpleado(view.lstEmpleados.getSelectedValue());
+            }
+
+        });
     }
 
     private void AccionNuevo() {
-        LimpiarComponentes();
-        MostrarOcultarBotonesPrincipales(false);
-        MostrarOcultarBotonesSecundarios(true);
-        HabilitarDeshabilitarComponentes(true);
+        this.LimpiarComponentes();
+        this.MostrarOcultarBotonesPrincipales(false);
+        this.MostrarOcultarBotonesSecundarios(true);
+        this.HabilitarDeshabilitarComponentes(true);
+        this.selectedIndex = -1;
     }
 
     private void AccionModificar() {
-
+        if (this.selectedIndex != -1) {
+            this.HabilitarDeshabilitarComponentes(true);
+            this.MostrarOcultarBotonesPrincipales(false);
+            this.MostrarOcultarBotonesSecundarios(true);
+            this.listaEmpleados.remove(this.selectedIndex);
+        } else {
+            JOptionPane.showConfirmDialog(this.view, "¡Seleccione el elemento que quiere modificar!", "Seleccione un elemento",
+                    JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private void AccionEliminar() {
+        if (this.selectedIndex != -1) {
+            var result = JOptionPane.showConfirmDialog(this.view, "¿Está seguro que desea eliminar el elemento seleccionado?", "Eliminar elemento",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
+            if (result == JOptionPane.YES_OPTION) {
+                this.listaEmpleados.remove(this.selectedIndex);
+                this.GuardarEnArchivo();
+                this.LeerArchivo();
+                this.LlenarListaEmpleadosVista();
+                this.LimpiarComponentes();
+            }
+        } else {
+            JOptionPane.showConfirmDialog(this.view, "¡Seleccione el elemento que quiere modificar!", "Seleccione un elemento",
+                    JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     private void AccionGuardar() {
@@ -120,12 +157,13 @@ public class FormularioViewModel {
 
         boolean guardadoExitoso = this.GuardarEnArchivo();
         if (guardadoExitoso == true) {
-            LimpiarComponentes();
-            MostrarOcultarBotonesPrincipales(true);
-            MostrarOcultarBotonesSecundarios(false);
-            HabilitarDeshabilitarComponentes(false);
+            this.LimpiarComponentes();
+            this.MostrarOcultarBotonesPrincipales(true);
+            this.MostrarOcultarBotonesSecundarios(false);
+            this.HabilitarDeshabilitarComponentes(false);
         }
 
+        this.selectedIndex = -1;
     }
 
     private void AccionCancelar() {
@@ -133,10 +171,37 @@ public class FormularioViewModel {
                 JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
         if (result == JOptionPane.YES_OPTION) {
-            LimpiarComponentes();
-            MostrarOcultarBotonesPrincipales(true);
-            MostrarOcultarBotonesSecundarios(false);
-            HabilitarDeshabilitarComponentes(false);
+            this.LimpiarComponentes();
+            this.MostrarOcultarBotonesPrincipales(true);
+            this.MostrarOcultarBotonesSecundarios(false);
+            this.HabilitarDeshabilitarComponentes(false);
+            this.LeerArchivo();
+            this.LlenarListaEmpleadosVista();
+        }
+
+        this.selectedIndex = -1;
+    }
+
+    private void AccionMostrarDetalleEmpleado(Empleado emp) {
+        if (emp != null) {
+            this.selectedIndex = this.view.lstEmpleados.getSelectedIndex();
+            this.view.txtNombre.setText(emp.getNombre());
+            this.view.txtApellidos.setText(emp.getApellidos());
+            this.view.txtDepartamento.setText(emp.getDepartamento());
+            this.view.txtEmail.setText(emp.getEmail());
+            this.view.txtObservaciones.setText(emp.getObservaciones());
+            this.view.spnEdad.setValue(emp.getEdad());
+            switch (emp.getGenero().getNumVal()) {
+                case 1:
+                    this.view.rbnHombre.setSelected(true);
+                    break;
+                case 2:
+                    this.view.rbnMujer.setSelected(true);
+                    break;
+                default:
+                    this.view.rbnOtro.setSelected(true);
+                    break;
+            }
         }
     }
 
@@ -162,6 +227,8 @@ public class FormularioViewModel {
         this.view.rbnHombre.setEnabled(estanHabilitados);
         this.view.rbnMujer.setEnabled(estanHabilitados);
         this.view.rbnOtro.setEnabled(estanHabilitados);
+
+        this.view.lstEmpleados.setEnabled(!estanHabilitados);
     }
 
     private void LimpiarComponentes() {
@@ -178,11 +245,12 @@ public class FormularioViewModel {
     private void LlenarListaEmpleadosVista() {
         DefaultListModel listModel = new DefaultListModel();
 
-        for (int i = 0; i < this.listaEmpleados.size(); i++) {
-            listModel.add(i, this.listaEmpleados.get(i).getNombre() + " " + this.listaEmpleados.get(i).getApellidos());
+        for (Empleado emp : this.listaEmpleados) {
+            listModel.addElement(emp);
         }
 
         this.view.lstEmpleados.setModel(listModel);
+        this.view.lstEmpleados.setCellRenderer(new EmpleadoJListItemRenderer());
     }
 
     private void LeerArchivo() {
@@ -192,7 +260,6 @@ public class FormularioViewModel {
 
             //String cadena = "Hola";
             //H, o, l, a
-
             int c = 0;
             while ((c = fr.read()) != -1) {
                 sb.append((char) c);
@@ -203,10 +270,15 @@ public class FormularioViewModel {
             fr.close();
 
             Gson gson = new Gson();
-            this.listaEmpleados = Arrays.asList(gson.fromJson(sb.toString(), Empleado[].class));
+            this.listaEmpleados = new ArrayList<Empleado>();
+            for (var item : gson.fromJson(sb.toString(), Empleado[].class)) {
+                this.listaEmpleados.add(item);
+            }
 
+            Collections.sort(this.listaEmpleados, new EmpleadoComparator());
         } catch (IOException ex) {
-
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -220,9 +292,11 @@ public class FormularioViewModel {
             fw.write(listaEmpleadosJson);
             fw.close();
 
+            this.LlenarListaEmpleadosVista();
+
             return true;
         } catch (IOException ex) {
-            var result = JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
                     JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
             return false;
         }

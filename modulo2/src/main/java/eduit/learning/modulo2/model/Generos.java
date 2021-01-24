@@ -10,7 +10,17 @@ package eduit.learning.modulo2.model;
  * @author abraham
  */
 public enum Generos {
-    Hombre,
-    Mujer,
-    Otro
+    Hombre(1),
+    Mujer(2),
+    Otro(2);
+
+    private int numVal;
+
+    Generos(int numVal) {
+        this.numVal = numVal;
+    }
+    
+    public int getNumVal(){
+        return this.numVal;
+    }
 }
