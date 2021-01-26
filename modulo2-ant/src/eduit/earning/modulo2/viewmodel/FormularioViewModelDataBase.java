@@ -171,7 +171,7 @@ public class FormularioViewModelDataBase {
         this.listaEmpleados.add(emp);
 
         boolean guardadoExitoso = true;
-        //Guardar en la base de datos
+        
         if (guardadoExitoso == true) {
             this.LimpiarComponentes();
             this.MostrarOcultarBotonesPrincipales(true);
