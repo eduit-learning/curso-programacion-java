@@ -16,10 +16,17 @@ import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
+import java.util.Scanner;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -35,7 +42,7 @@ public class FormularioViewModel {
     private List<Empleado> listaEmpleados;
     private int selectedIndex;
 
-    public FormularioViewModel(Formulario view) {
+    public FormularioViewModel(Formulario view) throws IOException, SQLException {
         this.view = view;
 
         this.InicializarEventos();

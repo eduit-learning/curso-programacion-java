@@ -2,16 +2,19 @@ package eduit.earning.modulo2;
 
 import eduit.earning.modulo2.viewmodel.FormularioViewModel;
 import eduit.learning.modulo2.model.Empleado;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Formulario extends javax.swing.JFrame {
 
-    public Formulario() {
+    public Formulario() throws IOException, SQLException {
         initComponents();
-        
+
         //Formulario f = new Formulario();
         //FormularioViewModel fvm = new FormularioViewModel(f);
-
         //Esta línea de código es equivalente a las dos líneas de código comentadas en la parte de arriba
         FormularioViewModel fvm = new FormularioViewModel(this);
 
@@ -272,7 +275,7 @@ public class Formulario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     public static void main(String args[]) {
@@ -302,7 +305,13 @@ public class Formulario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Formulario().setVisible(true);
+                try {
+                    new Formulario().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

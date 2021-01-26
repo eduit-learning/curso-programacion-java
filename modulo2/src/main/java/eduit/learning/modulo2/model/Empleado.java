@@ -11,6 +11,7 @@ package eduit.learning.modulo2.model;
  */
 public class Empleado {
 
+    private int empleadoID;
     private String nombre;
     private String apellidos;
     private String email;
@@ -21,6 +22,10 @@ public class Empleado {
 
     public Empleado() {
 
+    }
+    
+    public int getEmpleadoID(){
+        return this.empleadoID;
     }
 
     public String getNombre() {
@@ -49,6 +54,10 @@ public class Empleado {
 
     public Generos getGenero() {
         return this.genero;
+    }
+    
+    public void setEmpleadoID(int empleadoID){
+        this.empleadoID = empleadoID;
     }
 
     public void setNombre(String nombre) {
