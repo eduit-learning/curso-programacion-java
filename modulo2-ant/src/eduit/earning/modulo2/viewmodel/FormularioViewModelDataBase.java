@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import eduit.earning.modulo2.Formulario;
 import eduit.learning.modulo2.model.Empleado;
 import eduit.learning.modulo2.model.Generos;
+import eduit.learning.modulo2.repository.EmpleadoRepository;
 import eduit.learning.modulo2.utils.EmpleadoComparator;
 import eduit.learning.modulo2.utils.EmpleadoJListItemRenderer;
 import java.awt.event.ActionEvent;
@@ -43,6 +44,7 @@ public class FormularioViewModelDataBase {
     private final Formulario view;
     private List<Empleado> listaEmpleados;
     private int selectedIndex;
+    private EmpleadoRepository empRepository;
 
     public FormularioViewModelDataBase(Formulario view) throws IOException, SQLException {
         this.view = view;
@@ -54,10 +56,10 @@ public class FormularioViewModelDataBase {
         this.MostrarOcultarBotonesPrincipales(true);
         this.MostrarOcultarBotonesSecundarios(false);
 
-        this.listaEmpleados = new ArrayList();
         this.selectedIndex = -1;
+        this.empRepository = new EmpleadoRepository();
 
-        //Leer de la base de datos
+        this.listaEmpleados = this.empRepository.getEntity("");
         this.LlenarListaEmpleadosVista();
     }
 
@@ -131,7 +133,6 @@ public class FormularioViewModelDataBase {
             this.HabilitarDeshabilitarComponentes(true);
             this.MostrarOcultarBotonesPrincipales(false);
             this.MostrarOcultarBotonesSecundarios(true);
-            this.listaEmpleados.remove(this.selectedIndex);
         } else {
             JOptionPane.showConfirmDialog(this.view, "¡Seleccione el elemento que quiere modificar!", "Seleccione un elemento",
                     JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -139,63 +140,94 @@ public class FormularioViewModelDataBase {
     }
 
     private void AccionEliminar() {
-        if (this.selectedIndex != -1) {
-            var result = JOptionPane.showConfirmDialog(this.view, "¿Está seguro que desea eliminar el elemento seleccionado?", "Eliminar elemento",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        try {
+            if (this.selectedIndex != -1) {
+                var result = JOptionPane.showConfirmDialog(this.view, "¿Está seguro que desea eliminar el elemento seleccionado?", "Eliminar elemento",
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
-            if (result == JOptionPane.YES_OPTION) {
-                this.listaEmpleados.remove(this.selectedIndex);
-                //Eliminar de la base de datos
-                this.LlenarListaEmpleadosVista();
-                this.LimpiarComponentes();
+                if (result == JOptionPane.YES_OPTION) {
+                    this.empRepository.eliminarEmpleado(this.view.lstEmpleados.getSelectedValue());
+                    this.listaEmpleados = this.empRepository.getEntity("");
+                    this.LlenarListaEmpleadosVista();
+                    this.LimpiarComponentes();
+                }
+            } else {
+                JOptionPane.showConfirmDialog(this.view, "¡Seleccione el elemento que quiere modificar!", "Seleccione un elemento",
+                        JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE);
             }
-        } else {
-            JOptionPane.showConfirmDialog(this.view, "¡Seleccione el elemento que quiere modificar!", "Seleccione un elemento",
-                    JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void AccionGuardar() {
-        Empleado emp = new Empleado();
+        try {
+            Empleado emp = new Empleado();
 
-        emp.setNombre(this.view.txtNombre.getText());
-        emp.setApellidos(this.view.txtApellidos.getText());
-        emp.setDepartamento(this.view.txtDepartamento.getText());
-        emp.setEmail(this.view.txtEmail.getText());
-        emp.setObservaciones(this.view.txtObservaciones.getText());
-        emp.setGenero(this.view.rbnHombre.isSelected() == true ? Generos.Hombre
-                : this.view.rbnMujer.isSelected() == true ? Generos.Mujer
-                : Generos.Otro);
-        emp.setEdad(Byte.parseByte(this.view.spnEdad.getValue().toString()));
+            emp.setNombre(this.view.txtNombre.getText());
+            emp.setApellidos(this.view.txtApellidos.getText());
+            emp.setDepartamento(this.view.txtDepartamento.getText());
+            emp.setEmail(this.view.txtEmail.getText());
+            emp.setObservaciones(this.view.txtObservaciones.getText());
+            emp.setGenero(this.view.rbnHombre.isSelected() == true ? Generos.Hombre
+                    : this.view.rbnMujer.isSelected() == true ? Generos.Mujer
+                    : Generos.Otro);
+            emp.setEdad(Byte.parseByte(this.view.spnEdad.getValue().toString()));
 
-        this.listaEmpleados.add(emp);
+            int result = 0;
 
-        boolean guardadoExitoso = true;
-        
-        if (guardadoExitoso == true) {
-            this.LimpiarComponentes();
-            this.MostrarOcultarBotonesPrincipales(true);
-            this.MostrarOcultarBotonesSecundarios(false);
-            this.HabilitarDeshabilitarComponentes(false);
+            if (this.selectedIndex != -1) {
+                emp.setEmpleadoID(this.view.lstEmpleados.getSelectedValue().getEmpleadoID());
+                result = this.empRepository.updateEntity(emp);
+            } else {
+                result = this.empRepository.insertEntity(emp);
+            }
+
+            if (result > 0) {
+                this.listaEmpleados = this.empRepository.getEntity("");
+                this.LlenarListaEmpleadosVista();
+                this.LimpiarComponentes();
+                this.MostrarOcultarBotonesPrincipales(true);
+                this.MostrarOcultarBotonesSecundarios(false);
+                this.HabilitarDeshabilitarComponentes(false);
+            }
+
+            this.selectedIndex = -1;
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         }
-
-        this.selectedIndex = -1;
     }
 
     private void AccionCancelar() {
-        var result = JOptionPane.showConfirmDialog(this.view, "¿Está seguro que desea cancelar la operación?", "Cancelar operación",
-                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        try {
+            var result = JOptionPane.showConfirmDialog(this.view, "¿Está seguro que desea cancelar la operación?", "Cancelar operación",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
-        if (result == JOptionPane.YES_OPTION) {
-            this.LimpiarComponentes();
-            this.MostrarOcultarBotonesPrincipales(true);
-            this.MostrarOcultarBotonesSecundarios(false);
-            this.HabilitarDeshabilitarComponentes(false);
-            //Leer de nuevo de la base de datos
-            this.LlenarListaEmpleadosVista();
+            if (result == JOptionPane.YES_OPTION) {
+                this.LimpiarComponentes();
+                this.MostrarOcultarBotonesPrincipales(true);
+                this.MostrarOcultarBotonesSecundarios(false);
+                this.HabilitarDeshabilitarComponentes(false);
+                this.listaEmpleados = this.empRepository.getEntity("");
+                this.LlenarListaEmpleadosVista();
+            }
+
+            this.selectedIndex = -1;
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         }
-
-        this.selectedIndex = -1;
     }
 
     private void AccionMostrarDetalleEmpleado(Empleado emp) {
@@ -304,7 +336,7 @@ public class FormularioViewModelDataBase {
             }
 
             Collections.sort(this.listaEmpleados, new EmpleadoComparator());
-            
+
             this.LlenarListaEmpleadosVista();
         } catch (IOException ex) {
             JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",

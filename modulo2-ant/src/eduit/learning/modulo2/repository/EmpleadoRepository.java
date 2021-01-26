@@ -82,10 +82,13 @@ public class EmpleadoRepository {
         }
 
         rs.close();
-
         this.sqlConnection.close();
         this.statement.close();
 
         return empleados;
+    }
+    
+    public int eliminarEmpleado(Empleado emp){
+        return 1;
     }
 }
