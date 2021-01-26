@@ -12,7 +12,7 @@ package eduit.learning.modulo2.model;
 public enum Generos {
     Hombre(1),
     Mujer(2),
-    Otro(2);
+    Otro(3);
 
     private int numVal;
 

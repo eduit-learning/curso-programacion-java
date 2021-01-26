@@ -41,9 +41,12 @@ public class EmpleadoJListItemRenderer extends javax.swing.JPanel implements Lis
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblDepartamento = new javax.swing.JLabel();
         lblCorreo = new javax.swing.JLabel();
+
+        jLabel1.setText("jLabel1");
 
         setBackground(new java.awt.Color(200, 239, 255));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 81, 120), 1, true));
@@ -91,6 +94,7 @@ public class EmpleadoJListItemRenderer extends javax.swing.JPanel implements Lis
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     public javax.swing.JLabel lblCorreo;
     public javax.swing.JLabel lblDepartamento;
     public javax.swing.JLabel lblNombre;

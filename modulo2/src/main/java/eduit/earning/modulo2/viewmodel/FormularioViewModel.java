@@ -169,7 +169,11 @@ public class FormularioViewModel {
                 : Generos.Otro);
         emp.setEdad(Byte.parseByte(this.view.spnEdad.getValue().toString()));
 
-        this.listaEmpleados.add(emp);
+        try {
+            this.listaEmpleados.add(emp);
+        } catch (Exception ex) {
+            String x = ex.getMessage();
+        }
 
         boolean guardadoExitoso = this.GuardarEnArchivo();
         if (guardadoExitoso == true) {
@@ -225,7 +229,7 @@ public class FormularioViewModel {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         int result = fileChooser.showOpenDialog(this.view);
-        
+
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             //this.LeerArchivo(selectedFile.getAbsolutePath());
@@ -274,6 +278,7 @@ public class FormularioViewModel {
         DefaultListModel listModel = new DefaultListModel();
 
         for (Empleado emp : this.listaEmpleados) {
+            //listModel.addElement(emp.getNombre() + " " + emp.getApellidos());
             listModel.addElement(emp);
         }
 
@@ -299,6 +304,8 @@ public class FormularioViewModel {
 
             Gson gson = new Gson();
             this.listaEmpleados = new ArrayList<Empleado>();
+
+            //this.listaEmpleados = Arrays.asList(gson.fromJson(sb.toString(), Empleado[].class));
             for (var item : gson.fromJson(sb.toString(), Empleado[].class)) {
                 this.listaEmpleados.add(item);
             }

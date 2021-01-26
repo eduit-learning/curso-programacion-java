@@ -17,8 +17,8 @@ public class Formulario extends javax.swing.JFrame {
         //Formulario f = new Formulario();
         //FormularioViewModel fvm = new FormularioViewModel(f);
         //Esta línea de código es equivalente a las dos líneas de código comentadas en la parte de arriba
-        //FormularioViewModel fvm = new FormularioViewModel(this);
-        FormularioViewModelDataBase fvm = new FormularioViewModelDataBase(this);
+        FormularioViewModel fvm = new FormularioViewModel(this);
+        //FormularioViewModelDataBase fvm = new FormularioViewModelDataBase(this);
 
     }
 
