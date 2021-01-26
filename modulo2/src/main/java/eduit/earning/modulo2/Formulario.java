@@ -1,6 +1,7 @@
 package eduit.earning.modulo2;
 
 import eduit.earning.modulo2.viewmodel.FormularioViewModel;
+import eduit.earning.modulo2.viewmodel.FormularioViewModelDataBase;
 import eduit.learning.modulo2.model.Empleado;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,7 +17,8 @@ public class Formulario extends javax.swing.JFrame {
         //Formulario f = new Formulario();
         //FormularioViewModel fvm = new FormularioViewModel(f);
         //Esta línea de código es equivalente a las dos líneas de código comentadas en la parte de arriba
-        FormularioViewModel fvm = new FormularioViewModel(this);
+        //FormularioViewModel fvm = new FormularioViewModel(this);
+        FormularioViewModelDataBase fvm = new FormularioViewModelDataBase(this);
 
     }
 
@@ -50,6 +52,7 @@ public class Formulario extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstEmpleados = new javax.swing.JList<>();
+        btnCargarArchivo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Captura de empleado");
@@ -165,6 +168,9 @@ public class Formulario extends javax.swing.JFrame {
 
         jScrollPane3.setViewportView(jScrollPane2);
 
+        btnCargarArchivo.setText("Cargar Archivo");
+        btnCargarArchivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,6 +208,8 @@ public class Formulario extends javax.swing.JFrame {
                         .addComponent(btnModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCargarArchivo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -248,7 +256,8 @@ public class Formulario extends javax.swing.JFrame {
                             .addComponent(btnModificar)
                             .addComponent(btnEliminar)
                             .addComponent(btnGuardar)
-                            .addComponent(btnCancelar))
+                            .addComponent(btnCancelar)
+                            .addComponent(btnCargarArchivo))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -319,6 +328,7 @@ public class Formulario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.ButtonGroup btgGeneros;
     public javax.swing.JButton btnCancelar;
+    public javax.swing.JButton btnCargarArchivo;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnModificar;

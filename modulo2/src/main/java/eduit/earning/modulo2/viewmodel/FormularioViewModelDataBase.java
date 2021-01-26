@@ -38,13 +38,13 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author abraham
  */
-public class FormularioViewModel {
+public class FormularioViewModelDataBase {
 
     private final Formulario view;
     private List<Empleado> listaEmpleados;
     private int selectedIndex;
 
-    public FormularioViewModel(Formulario view) throws IOException, SQLException {
+    public FormularioViewModelDataBase(Formulario view) throws IOException, SQLException {
         this.view = view;
 
         this.InicializarEventos();
@@ -57,7 +57,7 @@ public class FormularioViewModel {
         this.listaEmpleados = new ArrayList();
         this.selectedIndex = -1;
 
-        this.LeerArchivo();
+        //Leer de la base de datos
         this.LlenarListaEmpleadosVista();
     }
 
@@ -145,8 +145,7 @@ public class FormularioViewModel {
 
             if (result == JOptionPane.YES_OPTION) {
                 this.listaEmpleados.remove(this.selectedIndex);
-                this.GuardarEnArchivo();
-                this.LeerArchivo();
+                //Eliminar de la base de datos
                 this.LlenarListaEmpleadosVista();
                 this.LimpiarComponentes();
             }
@@ -171,7 +170,8 @@ public class FormularioViewModel {
 
         this.listaEmpleados.add(emp);
 
-        boolean guardadoExitoso = this.GuardarEnArchivo();
+        boolean guardadoExitoso = true;
+        //Guardar en la base de datos
         if (guardadoExitoso == true) {
             this.LimpiarComponentes();
             this.MostrarOcultarBotonesPrincipales(true);
@@ -191,7 +191,7 @@ public class FormularioViewModel {
             this.MostrarOcultarBotonesPrincipales(true);
             this.MostrarOcultarBotonesSecundarios(false);
             this.HabilitarDeshabilitarComponentes(false);
-            this.LeerArchivo();
+            //Leer de nuevo de la base de datos
             this.LlenarListaEmpleadosVista();
         }
 
@@ -225,10 +225,10 @@ public class FormularioViewModel {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         int result = fileChooser.showOpenDialog(this.view);
-        
+
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            //this.LeerArchivo(selectedFile.getAbsolutePath());
+            this.LeerArchivo(selectedFile.getAbsolutePath());
         }
     }
 
@@ -281,9 +281,9 @@ public class FormularioViewModel {
         this.view.lstEmpleados.setCellRenderer(new EmpleadoJListItemRenderer());
     }
 
-    private void LeerArchivo() {
+    private void LeerArchivo(String path) {
         try {
-            FileReader fr = new FileReader("C:\\TMP\\Formulario_ListaEmpleados.txt");
+            FileReader fr = new FileReader(path);
             StringBuilder sb = new StringBuilder();
 
             //String cadena = "Hola";
@@ -304,29 +304,11 @@ public class FormularioViewModel {
             }
 
             Collections.sort(this.listaEmpleados, new EmpleadoComparator());
-        } catch (IOException ex) {
-            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
-                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private boolean GuardarEnArchivo() {
-        try {
-            FileWriter fw = new FileWriter("C:\\TMP\\Formulario_ListaEmpleados.txt");
-
-            Gson gson = new Gson();
-            String listaEmpleadosJson = gson.toJson(this.listaEmpleados);
-
-            fw.write(listaEmpleadosJson);
-            fw.close();
-
+            
             this.LlenarListaEmpleadosVista();
-
-            return true;
         } catch (IOException ex) {
             JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
                     JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
-            return false;
         }
     }
 }
