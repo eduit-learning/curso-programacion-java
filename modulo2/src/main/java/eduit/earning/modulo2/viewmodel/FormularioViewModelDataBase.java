@@ -156,9 +156,11 @@ public class FormularioViewModelDataBase {
                         JOptionPane.CLOSED_OPTION, JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException ex) {
-
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
-
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -196,9 +198,11 @@ public class FormularioViewModelDataBase {
 
             this.selectedIndex = -1;
         } catch (SQLException ex) {
-
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
-
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -218,9 +222,11 @@ public class FormularioViewModelDataBase {
 
             this.selectedIndex = -1;
         } catch (SQLException ex) {
-
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
-
+            JOptionPane.showConfirmDialog(this.view, "¡Ocurrió un error al intentar guardar el archivo!", "Error",
+                    JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         }
     }
 
