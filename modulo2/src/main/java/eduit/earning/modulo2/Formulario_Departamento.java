@@ -186,6 +186,7 @@ public class Formulario_Departamento extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Idiomas"));
 
         btgIdioma.add(rbnEspañol);
+        rbnEspañol.setSelected(true);
         rbnEspañol.setText("Español");
         rbnEspañol.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
