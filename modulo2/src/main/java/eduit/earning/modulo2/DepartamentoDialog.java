@@ -6,6 +6,8 @@
 package eduit.earning.modulo2;
 
 import eduit.earning.modulo2.viewmodel.DepartamentoViewModel;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -21,6 +23,12 @@ public class DepartamentoDialog extends javax.swing.JDialog {
         initComponents();
         
         DepartamentoViewModel depViewModel = new DepartamentoViewModel(this);
+        
+        Locale locale = new Locale("en","US");
+        ResourceBundle exampleBundle = ResourceBundle.getBundle("eduit.learning.modulo2.repository.DepartamentoResourceBundle", locale);
+        
+        this.lblNombre.setText(exampleBundle.getString("lblNombre"));
+        this.lblDescripcion.setText(exampleBundle.getString("lblDescripcion"));
     }
 
     /**
