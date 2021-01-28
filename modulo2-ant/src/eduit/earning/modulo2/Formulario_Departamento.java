@@ -2,6 +2,7 @@ package eduit.earning.modulo2;
 
 import eduit.earning.modulo2.viewmodel.FormularioViewModel;
 import eduit.earning.modulo2.viewmodel.FormularioViewModelDataBase;
+import eduit.earning.modulo2.viewmodel.Formulario_DepartamentoViewModelDataBase;
 import eduit.learning.modulo2.model.Empleado;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,16 +10,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class Formulario extends javax.swing.JFrame {
+public class Formulario_Departamento extends javax.swing.JFrame {
 
-    public Formulario() throws IOException, SQLException {
+    public Formulario_Departamento() throws IOException, SQLException {
         initComponents();
 
         //Formulario f = new Formulario();
         //FormularioViewModel fvm = new FormularioViewModel(f);
         //Esta línea de código es equivalente a las dos líneas de código comentadas en la parte de arriba
         //FormularioViewModel fvm = new FormularioViewModel(this);
-        FormularioViewModelDataBase fvm = new FormularioViewModelDataBase(this);
+        Formulario_DepartamentoViewModelDataBase fvm = new Formulario_DepartamentoViewModelDataBase(this);
 
     }
 
@@ -40,7 +41,6 @@ public class Formulario extends javax.swing.JFrame {
         lblEmail = new javax.swing.JLabel();
         lblDepartamento = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
-        txtDepartamento = new javax.swing.JTextField();
         lblObservaciones = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservaciones = new javax.swing.JTextArea();
@@ -53,6 +53,8 @@ public class Formulario extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         lstEmpleados = new javax.swing.JList<>();
         btnCargarArchivo = new javax.swing.JButton();
+        cmbDepartamento = new javax.swing.JComboBox<>();
+        btnNuevoDepartamento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Captura de empleado");
@@ -128,8 +130,6 @@ public class Formulario extends javax.swing.JFrame {
 
         txtEmail.setToolTipText("Capture el correo electrónico del empleado");
 
-        txtDepartamento.setToolTipText("Capture el departamento del empleado");
-
         lblObservaciones.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblObservaciones.setText("Observaciones");
         lblObservaciones.setToolTipText("Observaciones");
@@ -171,6 +171,13 @@ public class Formulario extends javax.swing.JFrame {
         btnCargarArchivo.setText("Cargar Archivo");
         btnCargarArchivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        cmbDepartamento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnNuevoDepartamento.setText("+");
+        btnNuevoDepartamento.setToolTipText("Agregar un nuevo departamento");
+        btnNuevoDepartamento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevoDepartamento.setMargin(new java.awt.Insets(2, 2, 2, 2));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -199,21 +206,22 @@ public class Formulario extends javax.swing.JFrame {
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblObservaciones))
                         .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblApellidos)
-                                            .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(31, 31, 31)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblEdad)
-                                            .addComponent(spnEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(lblDepartamento))
-                                .addGap(18, 18, 18)
-                                .addComponent(pnlGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(lblApellidos)
+                                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblEdad)
+                                    .addComponent(spnEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblDepartamento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnNuevoDepartamento))
+                            .addComponent(cmbDepartamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(pnlGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -241,11 +249,12 @@ public class Formulario extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lblEmail)
-                                    .addComponent(lblDepartamento))))
+                                    .addComponent(lblDepartamento)
+                                    .addComponent(btnNuevoDepartamento))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblObservaciones)
                         .addGap(24, 24, 24)
@@ -272,7 +281,6 @@ public class Formulario extends javax.swing.JFrame {
         lblEmail.getAccessibleContext().setAccessibleName("lblEmail");
         lblDepartamento.getAccessibleContext().setAccessibleName("lblDepartamento");
         txtEmail.getAccessibleContext().setAccessibleName("txtEmail");
-        txtDepartamento.getAccessibleContext().setAccessibleName("txtDepartamento");
         lblObservaciones.getAccessibleContext().setAccessibleName("lblObservaciones");
         btnNuevo.getAccessibleContext().setAccessibleName("btnNuevo");
         btnModificar.getAccessibleContext().setAccessibleName("btnModificar");
@@ -301,25 +309,28 @@ public class Formulario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Formulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Formulario_Departamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Formulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Formulario_Departamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Formulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Formulario_Departamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Formulario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Formulario_Departamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Formulario().setVisible(true);
+                    new Formulario_Departamento().setVisible(true);
                 } catch (IOException ex) {
-                    Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Formulario_Departamento.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
-                    Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Formulario_Departamento.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -333,6 +344,8 @@ public class Formulario extends javax.swing.JFrame {
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnModificar;
     public javax.swing.JButton btnNuevo;
+    public javax.swing.JButton btnNuevoDepartamento;
+    public javax.swing.JComboBox<String> cmbDepartamento;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -349,7 +362,6 @@ public class Formulario extends javax.swing.JFrame {
     public javax.swing.JRadioButton rbnOtro;
     public javax.swing.JSpinner spnEdad;
     public javax.swing.JTextField txtApellidos;
-    public javax.swing.JTextField txtDepartamento;
     public javax.swing.JTextField txtEmail;
     public javax.swing.JTextField txtNombre;
     public javax.swing.JTextArea txtObservaciones;

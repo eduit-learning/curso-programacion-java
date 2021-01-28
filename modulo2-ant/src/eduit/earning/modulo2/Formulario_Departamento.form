@@ -58,27 +58,27 @@
                           <Component id="lblObservaciones" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblApellidos" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtApellidos" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblEdad" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="spnEdad" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="lblDepartamento" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblApellidos" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtApellidos" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="pnlGeneros" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblEdad" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="spnEdad" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Component id="txtDepartamento" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="lblDepartamento" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnNuevoDepartamento" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="cmbDepartamento" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="pnlGeneros" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -114,13 +114,14 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblDepartamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnNuevoDepartamento" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtEmail" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtDepartamento" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbDepartamento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblObservaciones" min="-2" max="-2" attributes="0"/>
@@ -339,17 +340,6 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtDepartamento">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Capture el departamento del empleado"/>
-      </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="txtDepartamento"/>
-      </AccessibilityProperties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblObservaciones">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -497,6 +487,35 @@
         <Property name="text" type="java.lang.String" value="Cargar Archivo"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbDepartamento">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnNuevoDepartamento">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="+"/>
+        <Property name="toolTipText" type="java.lang.String" value="Agregar un nuevo departamento"/>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Hand Cursor"/>
+        </Property>
+        <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+          <Insets value="[2, 2, 2, 2]"/>
         </Property>
       </Properties>
       <AuxValues>
