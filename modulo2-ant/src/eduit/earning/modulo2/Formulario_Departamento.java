@@ -28,6 +28,8 @@ public class Formulario_Departamento extends javax.swing.JFrame {
     private void initComponents() {
 
         btgGeneros = new javax.swing.ButtonGroup();
+        jSeparator1 = new javax.swing.JSeparator();
+        btgIdioma = new javax.swing.ButtonGroup();
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         lblApellidos = new javax.swing.JLabel();
@@ -55,6 +57,9 @@ public class Formulario_Departamento extends javax.swing.JFrame {
         btnCargarArchivo = new javax.swing.JButton();
         cmbDepartamento = new javax.swing.JComboBox<>();
         btnNuevoDepartamento = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        rbnEspañol = new javax.swing.JRadioButton();
+        rbnIngles = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Captura de empleado");
@@ -178,6 +183,36 @@ public class Formulario_Departamento extends javax.swing.JFrame {
         btnNuevoDepartamento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevoDepartamento.setMargin(new java.awt.Insets(2, 2, 2, 2));
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Idiomas"));
+
+        btgIdioma.add(rbnEspañol);
+        rbnEspañol.setSelected(true);
+        rbnEspañol.setText("Español");
+        rbnEspañol.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btgIdioma.add(rbnIngles);
+        rbnIngles.setText("Inglés");
+        rbnIngles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(rbnEspañol)
+                .addGap(18, 18, 18)
+                .addComponent(rbnIngles)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbnEspañol)
+                    .addComponent(rbnIngles)))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -221,7 +256,9 @@ public class Formulario_Departamento extends javax.swing.JFrame {
                                 .addComponent(btnNuevoDepartamento))
                             .addComponent(cmbDepartamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(pnlGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnlGeneros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -233,8 +270,7 @@ public class Formulario_Departamento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lblNombre)
@@ -250,11 +286,15 @@ public class Formulario_Departamento extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lblEmail)
                                     .addComponent(lblDepartamento)
-                                    .addComponent(btnNuevoDepartamento))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnNuevoDepartamento))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(pnlGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblObservaciones)
                         .addGap(24, 24, 24)
@@ -338,6 +378,7 @@ public class Formulario_Departamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.ButtonGroup btgGeneros;
+    public javax.swing.ButtonGroup btgIdioma;
     public javax.swing.JButton btnCancelar;
     public javax.swing.JButton btnCargarArchivo;
     public javax.swing.JButton btnEliminar;
@@ -346,18 +387,22 @@ public class Formulario_Departamento extends javax.swing.JFrame {
     public javax.swing.JButton btnNuevo;
     public javax.swing.JButton btnNuevoDepartamento;
     public javax.swing.JComboBox<String> cmbDepartamento;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblApellidos;
+    private javax.swing.JSeparator jSeparator1;
+    public javax.swing.JLabel lblApellidos;
     private javax.swing.JLabel lblDepartamento;
-    private javax.swing.JLabel lblEdad;
+    public javax.swing.JLabel lblEdad;
     private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblNombre;
+    public javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblObservaciones;
     public javax.swing.JList<Empleado> lstEmpleados;
     private javax.swing.JPanel pnlGeneros;
+    public javax.swing.JRadioButton rbnEspañol;
     public javax.swing.JRadioButton rbnHombre;
+    public javax.swing.JRadioButton rbnIngles;
     public javax.swing.JRadioButton rbnMujer;
     public javax.swing.JRadioButton rbnOtro;
     public javax.swing.JSpinner spnEdad;
