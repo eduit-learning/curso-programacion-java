@@ -37,7 +37,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -56,6 +58,7 @@ public class Formulario_DepartamentoViewModelDataBase {
     private List<Empleado> listaEmpleados;
     private int selectedIndex;
     private EmpleadoRepository empRepository;
+    private Locale locale;
 
     public Formulario_DepartamentoViewModelDataBase(Formulario_Departamento view) throws IOException, SQLException {
         this.view = view;
@@ -73,6 +76,7 @@ public class Formulario_DepartamentoViewModelDataBase {
         this.listaEmpleados = this.empRepository.getEntity("");
         this.LlenarListaEmpleadosVista();
         this.LlenarComboDepartamento();
+        this.locale = new Locale("es", "MX");
     }
 
     private void InicializarEventos() {
@@ -135,6 +139,21 @@ public class Formulario_DepartamentoViewModelDataBase {
             @Override
             public void actionPerformed(ActionEvent e) {
                 AccionNuevoDepartamento();
+            }
+
+        });
+
+        this.view.rbnIngles.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AccionCambiarIdioma("en", "US");
+            }
+        });
+
+        this.view.rbnEspañol.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AccionCambiarIdioma("es", "MX");
             }
 
         });
@@ -285,9 +304,9 @@ public class Formulario_DepartamentoViewModelDataBase {
     }
 
     private void AccionNuevoDepartamento() {
-        DepartamentoDialog depDialog = new DepartamentoDialog(this.view, true);
+        DepartamentoDialog depDialog = new DepartamentoDialog(this.view, true, this.locale);
         depDialog.setVisible(true);
-        depDialog.addWindowListener(new WindowListener(){
+        depDialog.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {
             }
@@ -318,7 +337,7 @@ public class Formulario_DepartamentoViewModelDataBase {
             @Override
             public void windowDeactivated(WindowEvent e) {
             }
-            
+
         });
     }
 
@@ -426,4 +445,14 @@ public class Formulario_DepartamentoViewModelDataBase {
                     JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    private void AccionCambiarIdioma(String idioma, String region) {
+        this.locale = new Locale(idioma, region);
+        ResourceBundle exampleBundle = ResourceBundle.getBundle("eduit.learning.modulo2.repository.DepartamentoResourceBundleFormulario", this.locale);
+
+        this.view.lblNombre.setText(exampleBundle.getString("lblNombre"));
+        this.view.lblApellidos.setText(exampleBundle.getString("lblApellidos"));
+        this.view.lblEdad.setText(exampleBundle.getString("lblEdad"));
+    }
+
 }

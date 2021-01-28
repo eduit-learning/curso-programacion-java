@@ -18,15 +18,14 @@ public class DepartamentoDialog extends javax.swing.JDialog {
     /**
      * Creates new form DepartamentoDialog
      */
-    public DepartamentoDialog(java.awt.Frame parent, boolean modal) {
+    public DepartamentoDialog(java.awt.Frame parent, boolean modal, Locale locale) {
         super(parent, modal);
         initComponents();
-        
+
         DepartamentoViewModel depViewModel = new DepartamentoViewModel(this);
-        
-        Locale locale = new Locale("en","US");
+
         ResourceBundle exampleBundle = ResourceBundle.getBundle("eduit.learning.modulo2.repository.DepartamentoResourceBundle", locale);
-        
+
         this.lblNombre.setText(exampleBundle.getString("lblNombre"));
         this.lblDescripcion.setText(exampleBundle.getString("lblDescripcion"));
     }
@@ -143,7 +142,7 @@ public class DepartamentoDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DepartamentoDialog dialog = new DepartamentoDialog(new javax.swing.JFrame(), true);
+                DepartamentoDialog dialog = new DepartamentoDialog(new javax.swing.JFrame(), true, new Locale("es", "MX"));
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
