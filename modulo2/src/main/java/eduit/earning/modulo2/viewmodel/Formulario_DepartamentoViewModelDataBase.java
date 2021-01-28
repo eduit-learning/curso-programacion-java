@@ -294,10 +294,12 @@ public class Formulario_DepartamentoViewModelDataBase {
 
             @Override
             public void windowClosing(WindowEvent e) {
+                //Aún no se hace el dispose
             }
 
             @Override
             public void windowClosed(WindowEvent e) {
+                //Ya se hizo el dispose
                 LlenarComboDepartamento();
             }
 

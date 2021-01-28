@@ -4,7 +4,7 @@ public class Departamento {
 
     private int departamentoID;
     private String nombre;
-    private String Descripcion;
+    private String descripcion;
 
     public Departamento() {
 
@@ -19,7 +19,7 @@ public class Departamento {
     }
 
     public String getDescripcion() {
-        return this.Descripcion;
+        return this.descripcion;
     }
 
     public void setDepartamentoID(int departamentoID) {
@@ -31,6 +31,6 @@ public class Departamento {
     }
 
     public void setDescripcion(String descripcion) {
-        this.Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 }
