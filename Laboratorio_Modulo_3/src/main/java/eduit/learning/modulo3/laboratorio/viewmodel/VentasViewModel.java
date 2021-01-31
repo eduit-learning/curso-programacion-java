@@ -8,6 +8,8 @@ import eduit.learning.modulo3.laboratorio.utils.Utils;
 import eduit.learning.modulo3.laboratorio.vista.VentasView;
 import java.io.*;
 import java.util.*;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class VentasViewModel {
     
@@ -16,6 +18,7 @@ public class VentasViewModel {
     private StringBuilder mensajesProcesamientoArchivo;
     private Locale applicationLocale;
     private ResourceBundle mensajesVentasRG;
+    private ResourceBundle etiquetasVentasRG;
     private VentasView view;
     private SQLContext context;
     
@@ -24,23 +27,49 @@ public class VentasViewModel {
         this.context = context;
     }
     
-    private void AccionAbrirArchivo(){
+    private void inicializarEventos() {
         
     }
     
-    private void AccionGuardarEnBaseDatos(){
+    private void inicializarEtiquetas() {
         
     }
     
-    private void AccionGuardarArchivo(){
+    private void accionCambiarIdiomaRegion(String idioma, String region) {
+        this.applicationLocale = new Locale(region, region);
+        this.mensajesVentasRG = Utils.getMensajesVentasRB(this.applicationLocale);
+        this.etiquetasVentasRG = Utils.getEtiquetasVentasRB(applicationLocale);
+        this.inicializarEtiquetas();
+    }
+    
+    private void accionAbrirArchivo() {
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV FILES", "csv");
+        fileChooser.setFileFilter(filter);
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setMultiSelectionEnabled(false);
+        
+        int result = fileChooser.showOpenDialog(this.view);
+        
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            this.leerArchivo(selectedFile.getAbsolutePath());
+        }
+    }
+    
+    private void accionGuardarEnBaseDatos() {
         
     }
     
-    private void AccionDescartarArchivo(){
+    private void accionGuardarArchivo() {
         
     }
     
-    private void LeerArchivo(String path) {
+    private void accionDescartarArchivo() {
+        
+    }
+    
+    private void leerArchivo(String path) {
         try {
             FileReader fr = new FileReader(path);
             BufferedReader br = new BufferedReader(fr);

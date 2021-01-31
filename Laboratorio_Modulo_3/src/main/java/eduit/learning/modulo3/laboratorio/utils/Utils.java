@@ -17,4 +17,11 @@ public class Utils {
         }
         return mensajesVentasRB;
     }
+
+    public static ResourceBundle getEtiquetasVentasRB(Locale locale) {
+        if (mensajesVentasRB == null) {
+            mensajesVentasRB = ResourceBundle.getBundle(resourceBundlePackage + "EtiquetasVentasResourceBundle", locale);
+        }
+        return mensajesVentasRB;
+    }
 }
