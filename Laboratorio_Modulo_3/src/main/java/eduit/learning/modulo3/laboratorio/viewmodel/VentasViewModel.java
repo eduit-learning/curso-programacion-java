@@ -1,22 +1,27 @@
 package eduit.learning.modulo3.laboratorio.viewmodel;
 
 import eduit.learning.modulo3.laboratorio.modelo.Venta;
+import eduit.learning.modulo3.laboratorio.repository.SQLContext;
 import eduit.learning.modulo3.laboratorio.utils.Convertidor;
 import eduit.learning.modulo3.laboratorio.utils.Holder;
 import eduit.learning.modulo3.laboratorio.utils.Utils;
+import eduit.learning.modulo3.laboratorio.vista.VentasView;
 import java.io.*;
 import java.util.*;
 
-public class VentaViewModel {
+public class VentasViewModel {
     
     private List<Venta> ventasArchivo;
     private List<Venta> ventasBaseDatos;
     private StringBuilder mensajesProcesamientoArchivo;
     private Locale applicationLocale;
     private ResourceBundle mensajesVentasRG;
+    private VentasView view;
+    private SQLContext context;
     
-    public VentaViewModel() {
-        
+    public VentasViewModel(VentasView view, SQLContext context) {
+        this.view = view;
+        this.context = context;
     }
     
     private void AccionAbrirArchivo(){
