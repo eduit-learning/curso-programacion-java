@@ -37,9 +37,9 @@ public class VentasView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btgIdiomas = new javax.swing.ButtonGroup();
         tlbBarraHerramientas = new javax.swing.JToolBar();
         btnAbrirArchivo = new javax.swing.JButton();
-        btnEditarArchivo = new javax.swing.JButton();
         btnGuardarArchivo = new javax.swing.JButton();
         btnDescartarArchivo = new javax.swing.JButton();
         btnGuardarEnBaseDatos = new javax.swing.JButton();
@@ -48,18 +48,23 @@ public class VentasView extends javax.swing.JFrame {
         tabArchivo = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblArchivos = new javax.swing.JTable();
+        pnlMensajesArchivoProcesado = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtMensajesArchivoProcesado = new javax.swing.JTextArea();
         tabBaseDatos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblBaseDatos = new javax.swing.JTable();
         mbrMenu = new javax.swing.JMenuBar();
         mnuArchivo = new javax.swing.JMenu();
         mitemArchivoAbrir = new javax.swing.JMenuItem();
-        mitemArchivoEditar = new javax.swing.JMenuItem();
         mitemArchivoGuardar = new javax.swing.JMenuItem();
         mitemArchivoDescartar = new javax.swing.JMenuItem();
         mnuBaseDatos = new javax.swing.JMenu();
         mitemBaseDatosGuardar = new javax.swing.JMenuItem();
         mitemBaseDatosActualizar = new javax.swing.JMenuItem();
+        mnuIdioma = new javax.swing.JMenu();
+        mitemEspaniol = new javax.swing.JRadioButtonMenuItem();
+        mitemIngles = new javax.swing.JRadioButtonMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -74,13 +79,6 @@ public class VentasView extends javax.swing.JFrame {
         btnAbrirArchivo.setMinimumSize(new java.awt.Dimension(37, 37));
         btnAbrirArchivo.setPreferredSize(new java.awt.Dimension(37, 37));
         tlbBarraHerramientas.add(btnAbrirArchivo);
-
-        btnEditarArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icono_editar_archivo.png"))); // NOI18N
-        btnEditarArchivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditarArchivo.setFocusable(false);
-        btnEditarArchivo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnEditarArchivo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        tlbBarraHerramientas.add(btnEditarArchivo);
 
         btnGuardarArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icono_guardar_archivo.png"))); // NOI18N
         btnGuardarArchivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -138,13 +136,34 @@ public class VentasView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblArchivos);
 
+        pnlMensajesArchivoProcesado.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        txtMensajesArchivoProcesado.setEditable(false);
+        txtMensajesArchivoProcesado.setColumns(20);
+        txtMensajesArchivoProcesado.setFont(new java.awt.Font("Arial", 3, 10)); // NOI18N
+        txtMensajesArchivoProcesado.setRows(5);
+        jScrollPane2.setViewportView(txtMensajesArchivoProcesado);
+
+        javax.swing.GroupLayout pnlMensajesArchivoProcesadoLayout = new javax.swing.GroupLayout(pnlMensajesArchivoProcesado);
+        pnlMensajesArchivoProcesado.setLayout(pnlMensajesArchivoProcesadoLayout);
+        pnlMensajesArchivoProcesadoLayout.setHorizontalGroup(
+            pnlMensajesArchivoProcesadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2)
+        );
+        pnlMensajesArchivoProcesadoLayout.setVerticalGroup(
+            pnlMensajesArchivoProcesadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout tabArchivoLayout = new javax.swing.GroupLayout(tabArchivo);
         tabArchivo.setLayout(tabArchivoLayout);
         tabArchivoLayout.setHorizontalGroup(
             tabArchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabArchivoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+                .addGroup(tabArchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+                    .addComponent(pnlMensajesArchivoProcesado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabArchivoLayout.setVerticalGroup(
@@ -152,7 +171,9 @@ public class VentasView extends javax.swing.JFrame {
             .addGroup(tabArchivoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(pnlMensajesArchivoProcesado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tabPanel.addTab("", tabArchivo);
@@ -183,6 +204,8 @@ public class VentasView extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tblBaseDatos.setEnabled(false);
+        tblBaseDatos.setRowSelectionAllowed(false);
         jScrollPane3.setViewportView(tblBaseDatos);
 
         javax.swing.GroupLayout tabBaseDatosLayout = new javax.swing.GroupLayout(tabBaseDatos);
@@ -198,14 +221,13 @@ public class VentasView extends javax.swing.JFrame {
             tabBaseDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabBaseDatosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tabPanel.addTab("", tabBaseDatos);
 
         mnuArchivo.add(mitemArchivoAbrir);
-        mnuArchivo.add(mitemArchivoEditar);
         mnuArchivo.add(mitemArchivoGuardar);
         mnuArchivo.add(mitemArchivoDescartar);
 
@@ -216,6 +238,15 @@ public class VentasView extends javax.swing.JFrame {
         mnuBaseDatos.add(mitemBaseDatosActualizar);
 
         mbrMenu.add(mnuBaseDatos);
+
+        btgIdiomas.add(mitemEspaniol);
+        mitemEspaniol.setSelected(true);
+        mnuIdioma.add(mitemEspaniol);
+
+        btgIdiomas.add(mitemIngles);
+        mnuIdioma.add(mitemIngles);
+
+        mbrMenu.add(mnuIdioma);
 
         setJMenuBar(mbrMenu);
 
@@ -275,28 +306,33 @@ public class VentasView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btgIdiomas;
     public javax.swing.JButton btnAbrirArchivo;
     public javax.swing.JButton btnActualizarDeBaseDatos;
     public javax.swing.JButton btnDescartarArchivo;
-    public javax.swing.JButton btnEditarArchivo;
     public javax.swing.JButton btnGuardarArchivo;
     public javax.swing.JButton btnGuardarEnBaseDatos;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JMenuBar mbrMenu;
     public javax.swing.JMenuItem mitemArchivoAbrir;
     public javax.swing.JMenuItem mitemArchivoDescartar;
-    public javax.swing.JMenuItem mitemArchivoEditar;
     public javax.swing.JMenuItem mitemArchivoGuardar;
     public javax.swing.JMenuItem mitemBaseDatosActualizar;
     public javax.swing.JMenuItem mitemBaseDatosGuardar;
+    public javax.swing.JRadioButtonMenuItem mitemEspaniol;
+    public javax.swing.JRadioButtonMenuItem mitemIngles;
     public javax.swing.JMenu mnuArchivo;
     public javax.swing.JMenu mnuBaseDatos;
-    public javax.swing.JPanel tabArchivo;
+    public javax.swing.JMenu mnuIdioma;
+    public javax.swing.JPanel pnlMensajesArchivoProcesado;
+    private javax.swing.JPanel tabArchivo;
     public javax.swing.JPanel tabBaseDatos;
     public javax.swing.JTabbedPane tabPanel;
     public javax.swing.JTable tblArchivos;
     public javax.swing.JTable tblBaseDatos;
     public javax.swing.JToolBar tlbBarraHerramientas;
+    public javax.swing.JTextArea txtMensajesArchivoProcesado;
     // End of variables declaration//GEN-END:variables
 }

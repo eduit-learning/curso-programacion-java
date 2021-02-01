@@ -13,16 +13,12 @@ public class Utils {
     }
 
     public static ResourceBundle getMensajesVentasRB(Locale locale) {
-        if (mensajesVentasRB == null) {
-            mensajesVentasRB = ResourceBundle.getBundle(resourceBundlePackage + "MensajesVentasResourceBundle", locale);
-        }
+        mensajesVentasRB = ResourceBundle.getBundle(resourceBundlePackage + "MensajesVentasResourceBundle", locale);
         return mensajesVentasRB;
     }
 
     public static ResourceBundle getEtiquetasVentasRB(Locale locale) {
-        if (etiquetasVentasRB == null) {
-            etiquetasVentasRB = ResourceBundle.getBundle(resourceBundlePackage + "EtiquetasVentasResourceBundle", locale);
-        }
+        etiquetasVentasRB = ResourceBundle.getBundle(resourceBundlePackage + "EtiquetasVentasResourceBundle", locale);
         return etiquetasVentasRB;
     }
 }
