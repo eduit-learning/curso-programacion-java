@@ -7,6 +7,7 @@ public class Utils {
 
     private static final String resourceBundlePackage = "eduit.learning.modulo3.laboratorio.resourcesbundle.";
     private static ResourceBundle mensajesVentasRB;
+    private static ResourceBundle etiquetasVentasRB;
 
     private Utils() {
     }
@@ -19,9 +20,9 @@ public class Utils {
     }
 
     public static ResourceBundle getEtiquetasVentasRB(Locale locale) {
-        if (mensajesVentasRB == null) {
-            mensajesVentasRB = ResourceBundle.getBundle(resourceBundlePackage + "EtiquetasVentasResourceBundle", locale);
+        if (etiquetasVentasRB == null) {
+            etiquetasVentasRB = ResourceBundle.getBundle(resourceBundlePackage + "EtiquetasVentasResourceBundle", locale);
         }
-        return mensajesVentasRB;
+        return etiquetasVentasRB;
     }
 }

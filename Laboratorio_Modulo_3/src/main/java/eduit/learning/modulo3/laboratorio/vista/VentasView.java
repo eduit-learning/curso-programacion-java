@@ -15,13 +15,12 @@ import java.io.IOException;
  */
 public class VentasView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentasView
-     */
+    VentasViewModel viewModel;
+
     public VentasView() {
         try {
             initComponents();
-            VentasViewModel viewModel = new VentasViewModel(this, SQLContext.getSQLContext());
+            this.viewModel = new VentasViewModel(this, SQLContext.getSQLContext());
         } catch (IOException ex) {
 
         } catch (Exception ex) {
@@ -38,18 +37,204 @@ public class VentasView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tlbBarraHerramientas = new javax.swing.JToolBar();
+        btnAbrirArchivo = new javax.swing.JButton();
+        btnEditarArchivo = new javax.swing.JButton();
+        btnGuardarArchivo = new javax.swing.JButton();
+        btnDescartarArchivo = new javax.swing.JButton();
+        btnGuardarEnBaseDatos = new javax.swing.JButton();
+        btnActualizarDeBaseDatos = new javax.swing.JButton();
+        tabPanel = new javax.swing.JTabbedPane();
+        tabArchivo = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblArchivos = new javax.swing.JTable();
+        tabBaseDatos = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblBaseDatos = new javax.swing.JTable();
+        mbrMenu = new javax.swing.JMenuBar();
+        mnuArchivo = new javax.swing.JMenu();
+        mitemArchivoAbrir = new javax.swing.JMenuItem();
+        mitemArchivoEditar = new javax.swing.JMenuItem();
+        mitemArchivoGuardar = new javax.swing.JMenuItem();
+        mitemArchivoDescartar = new javax.swing.JMenuItem();
+        mnuBaseDatos = new javax.swing.JMenu();
+        mitemBaseDatosGuardar = new javax.swing.JMenuItem();
+        mitemBaseDatosActualizar = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        tlbBarraHerramientas.setRollover(true);
+
+        btnAbrirArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icono_abrir_archivo.png"))); // NOI18N
+        btnAbrirArchivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAbrirArchivo.setFocusable(false);
+        btnAbrirArchivo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAbrirArchivo.setMaximumSize(new java.awt.Dimension(37, 37));
+        btnAbrirArchivo.setMinimumSize(new java.awt.Dimension(37, 37));
+        btnAbrirArchivo.setPreferredSize(new java.awt.Dimension(37, 37));
+        tlbBarraHerramientas.add(btnAbrirArchivo);
+
+        btnEditarArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icono_editar_archivo.png"))); // NOI18N
+        btnEditarArchivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarArchivo.setFocusable(false);
+        btnEditarArchivo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEditarArchivo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tlbBarraHerramientas.add(btnEditarArchivo);
+
+        btnGuardarArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icono_guardar_archivo.png"))); // NOI18N
+        btnGuardarArchivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardarArchivo.setFocusable(false);
+        btnGuardarArchivo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGuardarArchivo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tlbBarraHerramientas.add(btnGuardarArchivo);
+
+        btnDescartarArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icono_descartar_archivo.png"))); // NOI18N
+        btnDescartarArchivo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDescartarArchivo.setFocusable(false);
+        btnDescartarArchivo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnDescartarArchivo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tlbBarraHerramientas.add(btnDescartarArchivo);
+
+        btnGuardarEnBaseDatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icono_guardar_databse.png"))); // NOI18N
+        btnGuardarEnBaseDatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardarEnBaseDatos.setFocusable(false);
+        btnGuardarEnBaseDatos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGuardarEnBaseDatos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tlbBarraHerramientas.add(btnGuardarEnBaseDatos);
+
+        btnActualizarDeBaseDatos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icono_actualizar_database.png"))); // NOI18N
+        btnActualizarDeBaseDatos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnActualizarDeBaseDatos.setFocusable(false);
+        btnActualizarDeBaseDatos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnActualizarDeBaseDatos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tlbBarraHerramientas.add(btnActualizarDeBaseDatos);
+
+        tblArchivos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblArchivos);
+
+        javax.swing.GroupLayout tabArchivoLayout = new javax.swing.GroupLayout(tabArchivo);
+        tabArchivo.setLayout(tabArchivoLayout);
+        tabArchivoLayout.setHorizontalGroup(
+            tabArchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabArchivoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        tabArchivoLayout.setVerticalGroup(
+            tabArchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabArchivoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tabPanel.addTab("", tabArchivo);
+
+        tblBaseDatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblBaseDatos);
+
+        javax.swing.GroupLayout tabBaseDatosLayout = new javax.swing.GroupLayout(tabBaseDatos);
+        tabBaseDatos.setLayout(tabBaseDatosLayout);
+        tabBaseDatosLayout.setHorizontalGroup(
+            tabBaseDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabBaseDatosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 764, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        tabBaseDatosLayout.setVerticalGroup(
+            tabBaseDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabBaseDatosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tabPanel.addTab("", tabBaseDatos);
+
+        mnuArchivo.add(mitemArchivoAbrir);
+        mnuArchivo.add(mitemArchivoEditar);
+        mnuArchivo.add(mitemArchivoGuardar);
+        mnuArchivo.add(mitemArchivoDescartar);
+
+        mbrMenu.add(mnuArchivo);
+
+        mitemBaseDatosGuardar.setToolTipText("");
+        mnuBaseDatos.add(mitemBaseDatosGuardar);
+        mnuBaseDatos.add(mitemBaseDatosActualizar);
+
+        mbrMenu.add(mnuBaseDatos);
+
+        setJMenuBar(mbrMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(tabPanel)
+            .addComponent(tlbBarraHerramientas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tlbBarraHerramientas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabPanel))
         );
+
+        tabPanel.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -90,5 +275,28 @@ public class VentasView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnAbrirArchivo;
+    public javax.swing.JButton btnActualizarDeBaseDatos;
+    public javax.swing.JButton btnDescartarArchivo;
+    public javax.swing.JButton btnEditarArchivo;
+    public javax.swing.JButton btnGuardarArchivo;
+    public javax.swing.JButton btnGuardarEnBaseDatos;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    public javax.swing.JMenuBar mbrMenu;
+    public javax.swing.JMenuItem mitemArchivoAbrir;
+    public javax.swing.JMenuItem mitemArchivoDescartar;
+    public javax.swing.JMenuItem mitemArchivoEditar;
+    public javax.swing.JMenuItem mitemArchivoGuardar;
+    public javax.swing.JMenuItem mitemBaseDatosActualizar;
+    public javax.swing.JMenuItem mitemBaseDatosGuardar;
+    public javax.swing.JMenu mnuArchivo;
+    public javax.swing.JMenu mnuBaseDatos;
+    public javax.swing.JPanel tabArchivo;
+    public javax.swing.JPanel tabBaseDatos;
+    public javax.swing.JTabbedPane tabPanel;
+    public javax.swing.JTable tblArchivos;
+    public javax.swing.JTable tblBaseDatos;
+    public javax.swing.JToolBar tlbBarraHerramientas;
     // End of variables declaration//GEN-END:variables
 }
