@@ -3,6 +3,7 @@ package pattern.creational.prototype;
 import java.awt.*;
 
 public class PrototypeExample {
+
     public static void main(String[] args) {
         Square square = new Square();
         square.setWidth(100);
@@ -11,6 +12,9 @@ public class PrototypeExample {
         square.setY(20);
         square.setColor(Color.BLACK);
 
-        System.out.printf("Original object: %s\nNew object: %s\n", square, square.clone()); // Salida objetos diferentes
+        Square squareClone = (Square) square.clone();
+        squareClone.setColor(Color.RED);
+
+        System.out.printf("Original object: %s\nNew object: %s\n", square, squareClone); // Salida objetos diferentes
     }
 }

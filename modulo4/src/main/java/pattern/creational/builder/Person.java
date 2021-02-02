@@ -5,10 +5,13 @@ package pattern.creational.builder;
  * esta clase, y así evitar usar constructores.
  */
 public class Person {
+
     private String firstName;
     private String lastName;
+    private String fechaNacimiento;
+    private int edad;
 
-    public Person(String firstName, String lastName) {
+    public Person(String firstName, String lastName, String fechaNacimiento, int edad) {
         this.firstName = firstName;
         this.lastName = lastName;
     }

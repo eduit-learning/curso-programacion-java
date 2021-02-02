@@ -1,9 +1,9 @@
 package pattern.behavioral.chainofresponsibility;
 
-public class AuthorizationInterceptor extends AbstractInterceptor {
+public class AuthorizationManejador extends AbstractManejador {
 
     @Override
-    public void handleRequest(Request request) {
+    public void manejarPeticion(Request request) {
         String url = request.getUrl();
         if (url.endsWith("/forbidden")) {
             throw new RuntimeException("Access Forbidden");

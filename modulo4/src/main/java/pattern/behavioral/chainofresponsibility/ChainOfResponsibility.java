@@ -5,15 +5,17 @@ import java.util.Map;
 public class ChainOfResponsibility {
 
     public static void main(String[] args) {
-        AuthorizationInterceptor authorizationInterceptor = new AuthorizationInterceptor();
 
-        AuthenticationInterceptor authenticationInterceptor = new AuthenticationInterceptor();
-        authenticationInterceptor.setNext(authorizationInterceptor);
-
+        AuthenticationManejador authenticationInterceptor = new AuthenticationManejador();
+        AuthorizationManejador authorizationInterceptor = new AuthorizationManejador();
+        TercerEslabon te = new TercerEslabon();
+        
         Request request = new Request();
         request.setHeaders(Map.of("Access-Token", "123"));
-        request.setUrl("http://myweb.com/forbidden");
-
+        request.setUrl("http://myweb.com/forbidde");
         authenticationInterceptor.intercept(request);
+
+        authenticationInterceptor.setNext(authorizationInterceptor);
+        authorizationInterceptor.setNext(te);
     }
 }
