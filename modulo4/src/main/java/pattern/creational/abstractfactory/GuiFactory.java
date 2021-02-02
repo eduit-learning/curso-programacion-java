@@ -8,10 +8,4 @@ public interface GuiFactory {
     Button createButton();
 
     Panel createPanel();
-    
-    void createTable();
-    
-    void createLabel();
-    
-    void createTextField();
 }
