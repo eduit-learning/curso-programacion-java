@@ -7,4 +7,5 @@ public interface PostsIterator {
     boolean hasNext();
     Post getNext();
     void reset();
+    Post getPrevious();
 }

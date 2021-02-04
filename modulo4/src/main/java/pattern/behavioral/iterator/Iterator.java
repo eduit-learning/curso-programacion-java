@@ -5,7 +5,7 @@ public class Iterator {
         Twitter twitter = new Twitter();
         PostsIterator postsIterator = twitter.findPostsByHashtag("#java");
         while (postsIterator.hasNext()){
-            Post post = postsIterator.getNext();
+            Post post = postsIterator.getPrevious();
             System.out.println(post.getContent());
         }
     }

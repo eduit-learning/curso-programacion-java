@@ -4,6 +4,7 @@ package pattern.behavioral.templatemethod;
  * Un objeto 2D.
  */
 public abstract class Animatable {
+
     private int x;
     private int y;
 
@@ -24,15 +25,32 @@ public abstract class Animatable {
     }
 
     /**
-     * Este es el "Template Method".
-     * Puede ser final para que no se herede.
+     * Este es el "Template Method". Puede ser final para que no se herede.
      */
     public void updateFrame() {
         animate();
         paint();
+        erase();
+    }
+
+    public final void updateFrame2() {
+        animate();
+        this.status("Animando");
+        
+        paint();
+        this.status("Pintando");
+        
+        erase();
+        this.status("Borrando");
     }
 
     public abstract void animate();
 
     public abstract void paint();
+
+    public abstract void erase();
+
+    public final void status(String status) {
+        System.out.println("El estatus es: " + status);
+    }
 }

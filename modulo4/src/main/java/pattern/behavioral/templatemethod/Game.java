@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Game {
+
     private static final int FPS = 30;
-    private List<Animatable> animatableObjects = Arrays.asList(new Rocket());
+    private List<Animatable> animatableObjects = Arrays.asList(new Rocket(), new WarTank());
 
     /**
      * Para este ejemplo simularemos que se trata de 30 frames por segundo.
@@ -15,6 +16,7 @@ public class Game {
             for (Animatable animatable : animatableObjects) {
                 // Se invoca al template method.
                 animatable.updateFrame();
+                animatable.updateFrame2();
             }
         }
     }

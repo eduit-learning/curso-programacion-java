@@ -5,6 +5,7 @@ package pattern.behavioral.iterator;
  * de saber la estructura de la colección o el algoritmo para obtenerlos.
  */
 public class TwitterIterator implements PostsIterator {
+
     private String hashtag;
     private Post[] posts;
     private int position;
@@ -16,12 +17,18 @@ public class TwitterIterator implements PostsIterator {
     @Override
     public boolean hasNext() {
         loadPosts();
-        return posts != null && posts.length > 0 && position < posts.length;
+        return posts != null && posts.length > 0;
     }
 
     @Override
     public Post getNext() {
+        position = position == posts.length ? 0 : position;
         return posts != null && position < posts.length ? posts[position++] : null;
+    }
+
+    public Post getPrevious() {
+        position = position == -1 ? (posts.length - 1) : position;
+        return posts != null && position < posts.length ? posts[position--] : null;
     }
 
     @Override
@@ -33,8 +40,8 @@ public class TwitterIterator implements PostsIterator {
     private void loadPosts() {
         if (posts == null) {
             posts = new Post[]{
-                    new Post(hashtag + " Java es un lenguaje orientado a objetos"),
-                    new Post("En " + hashtag + " los patrones de diseños ayudan mucho")
+                new Post(hashtag + " Java es un lenguaje orientado a objetos"),
+                new Post("En " + hashtag + " los patrones de diseños ayudan mucho")
             };
         }
     }
