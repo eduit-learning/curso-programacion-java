@@ -34,10 +34,13 @@ public class VentasViewModel {
     private SQLContext context;
     private VentasRepository ventasRepo;
 
+    private Command abrirArchivo;
+
     public VentasViewModel(VentasView view, SQLContext context) {
         this.view = view;
         this.context = context;
         this.ventasRepo = new VentasRepository(context);
+        this.abrirArchivo = new AbrirArchivoCommand();
 
         this.accionCambiarIdiomaRegion("es", "MX");
         this.inicializarEtiquetas();
@@ -58,14 +61,22 @@ public class VentasViewModel {
         this.view.btnAbrirArchivo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                accionAbrirArchivo();
+                String path = abrirArchivo.ExecuteString();
+                if (path != null && path.length() > 0) {
+                    leerArchivo(path);
+                    llenarTablaArchivo();
+                }
             }
         });
 
         this.view.mitemArchivoAbrir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                accionAbrirArchivo();
+                String path = abrirArchivo.ExecuteString();
+                if (path != null && path.length() > 0) {
+                    leerArchivo(path);
+                    llenarTablaArchivo();
+                }
             }
         });
 
@@ -209,22 +220,6 @@ public class VentasViewModel {
         this.mensajesVentasRG = Utils.getMensajesVentasRB(this.applicationLocale);
         this.etiquetasVentasRG = Utils.getEtiquetasVentasRB(this.applicationLocale);
         this.inicializarEtiquetas();
-    }
-
-    private void accionAbrirArchivo() {
-        JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV FILES", "csv");
-        fileChooser.setFileFilter(filter);
-        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        fileChooser.setMultiSelectionEnabled(false);
-
-        int result = fileChooser.showOpenDialog(this.view);
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            this.leerArchivo(selectedFile.getAbsolutePath());
-            this.llenarTablaArchivo();
-        }
     }
 
     private void accionGuardarEnBaseDatos() {
