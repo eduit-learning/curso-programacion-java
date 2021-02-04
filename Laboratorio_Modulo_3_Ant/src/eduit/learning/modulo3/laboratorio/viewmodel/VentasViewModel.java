@@ -33,11 +33,14 @@ public class VentasViewModel {
     private VentasView view;
     private SQLContext context;
     private VentasRepository ventasRepo;
+    private Command abrirArchivo;
 
     public VentasViewModel(VentasView view, SQLContext context) {
         this.view = view;
         this.context = context;
         this.ventasRepo = new VentasRepository(context);
+        
+        this.abrirArchivo = new AbrirArchivoCommand();
 
         this.accionCambiarIdiomaRegion("es", "MX");
         this.inicializarEtiquetas();
@@ -58,14 +61,22 @@ public class VentasViewModel {
         this.view.btnAbrirArchivo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                accionAbrirArchivo();
+                String path = abrirArchivo.ExecuteString();
+                if (path != null && path.length() > 0) {
+                    leerArchivo(path);
+                    llenarTablaArchivo();
+                }
             }
         });
 
         this.view.mitemArchivoAbrir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                accionAbrirArchivo();
+                String path = abrirArchivo.ExecuteString();
+                if (path != null && path.length() > 0) {
+                    leerArchivo(path);
+                    llenarTablaArchivo();
+                }
             }
         });
 
