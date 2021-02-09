@@ -11,9 +11,12 @@ public class AuthenticationManejador extends AbstractManejador {
     public void manejarPeticion(Request request) {
         String accessToken = request.getHeaders().get("Access-Token");
         if (!validTokens.contains(accessToken)) {
-            throw new RuntimeException("Invalid Access Token");
+            request.status += "El token proporcionado no se encontró\n\r";
+            request.previousWasSkiped = true;
+        } else {
+            request.status += "Token válido\n\r";
+            request.status += "Request authenticated\n\r";
+            request.previousWasSkiped = false;
         }
-
-        System.out.println("Request authenticated");
     }
 }

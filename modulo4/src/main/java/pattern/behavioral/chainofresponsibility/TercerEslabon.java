@@ -13,7 +13,7 @@ public class TercerEslabon extends AbstractManejador {
 
     @Override
     public void manejarPeticion(Request request) {
-        System.out.println("Este es el tercer eslabón de la cadena de responsabilidades");
+        request.status += "Fin de la cadena";
     }
-    
+
 }

@@ -3,8 +3,11 @@ package pattern.behavioral.chainofresponsibility;
 import java.util.Map;
 
 public class Request {
+
     private String url;
     private Map<String, String> headers;
+    public String status = "";
+    public boolean previousWasSkiped;
 
     public String getUrl() {
         return url;
