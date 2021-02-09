@@ -31,11 +31,12 @@ public class PropertyChangeView extends javax.swing.JFrame {
     private void updateViewWhenPropertyChanged(String propertyName) {
         try {
             Method getValue = this.viewModel.getModel().getClass().getMethod(("get" + propertyName), null);
-            if (propertyName == "Cronometro") {
-                this.txtCronometro.setText((String) getValue.invoke(this.viewModel.getModel(), null));
-            } else {
-                this.txtHora.setText((String) getValue.invoke(this.viewModel.getModel(), null));
-            }
+
+            Field txt = this.getClass().getDeclaredField(("txt" + propertyName));
+            JTextField txtField = (JTextField) txt.get(this);
+            //JTextField txtField = this.txtCronometro | this.txtHora
+            txtField.setText((String) getValue.invoke(this.viewModel.getModel(), null));
+
         } catch (Exception ex) {
             String message = ex.getMessage();
         }
@@ -49,12 +50,16 @@ public class PropertyChangeView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtCronometro = new javax.swing.JTextField();
         txtHora = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtCronometroSegundos = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Cronometro");
 
         jLabel2.setText("Hora Actual");
+
+        jLabel3.setText("Cronometro Segundos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,7 +75,12 @@ public class PropertyChangeView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(txtCronometroSegundos, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -84,7 +94,11 @@ public class PropertyChangeView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCronometro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCronometroSegundos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,7 +139,9 @@ public class PropertyChangeView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField txtCronometro;
+    private javax.swing.JTextField txtCronometroSegundos;
     private javax.swing.JTextField txtHora;
     // End of variables declaration//GEN-END:variables
 }
