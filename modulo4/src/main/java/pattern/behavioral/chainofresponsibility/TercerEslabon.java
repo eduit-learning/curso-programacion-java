@@ -13,7 +13,10 @@ public class TercerEslabon extends AbstractManejador {
 
     @Override
     public void manejarPeticion(Request request) {
-        request.status += "Fin de la cadena";
+        if (request.results.get(0) == true) {
+            request.status += "La tarea 1 fue saltada o no se ejecutó correctamente, no es posible ejecutar esta tarea\n\r";
+        }else{
+            request.status += "Fin de la cadena";
+        }
     }
-
 }

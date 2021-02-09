@@ -11,7 +11,7 @@ public class ChainOfResponsibility {
         TercerEslabon te = new TercerEslabon();
 
         Request request = new Request();
-        request.setHeaders(Map.of("Access-Token", "123"));
+        request.setHeaders(Map.of("Access-Token", "12"));
         request.setUrl("http://myweb.com/forbidden");
 
         authenticationInterceptor.setNext(authorizationInterceptor);

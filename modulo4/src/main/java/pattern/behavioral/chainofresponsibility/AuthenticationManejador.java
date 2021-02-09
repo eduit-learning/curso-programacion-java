@@ -13,11 +13,11 @@ public class AuthenticationManejador extends AbstractManejador {
         
         if (!validTokens.contains(accessToken)) {
             request.status += "El token proporcionado no se encontró\n\r";
-            request.previousWasSkiped = true;
+            request.results.add(true);
         } else {
             request.status += "Token válido\n\r";
             request.status += "Request authenticated\n\r";
-            request.previousWasSkiped = false;
+            request.results.add(false);
         }
     }
 }
