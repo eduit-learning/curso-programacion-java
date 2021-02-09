@@ -1,14 +1,14 @@
 package pattern.structural.composite;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase componente o contenedora. Cada componente puede contener
- * otros componentes.
+ * Clase componente o contenedora. Cada componente puede contener otros
+ * componentes.
  */
 public abstract class Component {
+
     protected List<Component> components = new ArrayList<>();
 
     public void add(Component component) {
@@ -20,8 +20,7 @@ public abstract class Component {
     }
 
     public void draw() {
-        components.stream()
-                .forEach(Component::draw);
+        components.stream().forEach(Component::draw);
     }
 
 }

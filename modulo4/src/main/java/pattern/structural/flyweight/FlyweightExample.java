@@ -7,6 +7,10 @@ public class FlyweightExample {
         TreeType type = TreeTypeFactory.getTreeType("Autumn Oak", Color.YELLOW);
         Tree tree1 = new Tree(10, 10, type);
         Tree tree2 = new Tree(20, 20, type);
+        Tree tree3 = new Tree(20, 20, type);
+        Tree tree4 = new Tree(20, 20, type);
+        Tree tree5 = new Tree(20, 20, type);
+        Tree tree6 = new Tree(20, 20, type);
 
         tree1.draw();
         tree2.draw();

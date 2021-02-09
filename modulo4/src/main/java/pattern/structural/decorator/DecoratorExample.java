@@ -8,5 +8,7 @@ public class DecoratorExample {
 
         EncryptionDecorator encryptionDecorator = new EncryptionDecorator(consoleDataSource);
         encryptionDecorator.writeData(data);
+        encryptionDecorator.writeEncryptedData(data);
+        encryptionDecorator.writeTolowerDate(data);
     }
 }

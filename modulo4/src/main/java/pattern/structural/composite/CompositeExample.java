@@ -7,8 +7,8 @@ package pattern.structural.composite;
 public class CompositeExample {
     public static void main(String[] args) {
         Window window = new Window("Main Window");
-
         Panel firstPanel = new Panel("First Panel");
+        
         firstPanel.add(new Label("Label in First Panel"));
         window.add(firstPanel);
 
