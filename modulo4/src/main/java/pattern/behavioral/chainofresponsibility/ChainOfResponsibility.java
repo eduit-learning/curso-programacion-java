@@ -12,10 +12,11 @@ public class ChainOfResponsibility {
 
         Request request = new Request();
         request.setHeaders(Map.of("Access-Token", "123"));
-        request.setUrl("http://myweb.com/forbidde");
+        request.setUrl("http://myweb.com/forbidden");
 
         authenticationInterceptor.setNext(authorizationInterceptor);
         authorizationInterceptor.setNext(te);
+        
         authenticationInterceptor.intercept(request);
 
         System.out.println(request.status);

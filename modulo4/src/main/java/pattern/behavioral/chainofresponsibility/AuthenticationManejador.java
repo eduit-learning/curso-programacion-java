@@ -10,6 +10,7 @@ public class AuthenticationManejador extends AbstractManejador {
     @Override
     public void manejarPeticion(Request request) {
         String accessToken = request.getHeaders().get("Access-Token");
+        
         if (!validTokens.contains(accessToken)) {
             request.status += "El token proporcionado no se encontró\n\r";
             request.previousWasSkiped = true;

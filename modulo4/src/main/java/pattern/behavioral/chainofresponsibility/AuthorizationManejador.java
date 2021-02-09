@@ -9,11 +9,13 @@ public class AuthorizationManejador extends AbstractManejador {
             request.previousWasSkiped = true;
         } else {
             String url = request.getUrl();
+            
             if (url.endsWith("/forbidden")) {
                 request.status += "Acceso denegado\n\r";
                 request.previousWasSkiped = true;
             } else {
-                request.status += "Acceso autorizado\n\r";
+                //request.status += "Acceso autorizado\n\r";
+                request.status = request.status + "Acceso autorizado\n\r";
                 request.previousWasSkiped = false;
             }
         }
