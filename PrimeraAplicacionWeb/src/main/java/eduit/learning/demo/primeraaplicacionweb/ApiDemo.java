@@ -1,5 +1,7 @@
 package eduit.learning.demo.primeraaplicacionweb;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -15,15 +17,20 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 public class ApiDemo {
 
-
     public ApiDemo() {
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("get/json/{id}")
-    public String getJson(int id) {
-        return "Estoy dentro del método getJson y el id es: " + id;
+    public List<Empleado> getJson(@PathParam("id") int id) {
+        List<Empleado> nombres= new ArrayList<>();
+        nombres.add(new Empleado("Abraham", 123));
+        nombres.add(new Empleado("Pedro", 124));
+        nombres.add(new Empleado("Juan", 125));
+        nombres.add(new Empleado("Francisco", 126));
+        
+        return nombres;
     }
 
     @GET

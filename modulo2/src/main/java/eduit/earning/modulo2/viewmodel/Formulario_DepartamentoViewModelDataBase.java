@@ -24,10 +24,14 @@ import java.awt.event.WindowListener;
 import java.awt.event.WindowStateListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -73,10 +77,41 @@ public class Formulario_DepartamentoViewModelDataBase {
         this.selectedIndex = -1;
         this.empRepository = new EmpleadoRepository();
 
-        this.listaEmpleados = this.empRepository.getEntity("");
+        this.listaEmpleados = this.obtenerEmpleadosServicio();
         this.LlenarListaEmpleadosVista();
         this.LlenarComboDepartamento();
         this.locale = new Locale("es", "MX");
+    }
+
+    private List<Empleado> obtenerEmpleadosServicio() {
+        try {
+            URL url = new URL("http://localhost:8080/PrimeraAplicacionWeb/api/demo/get/json/23");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+
+            if (conn.getResponseCode() != 200) {
+                System.out.println("Ocurrió un error al intentar hacer la petición: " + conn.getResponseCode());
+            }
+
+            InputStreamReader sr = new InputStreamReader(conn.getInputStream());
+            BufferedReader br = new BufferedReader(sr);
+
+            String output;
+            StringBuilder sb = new StringBuilder();
+            while ((output = br.readLine()) != null) {
+                sb.append(output);
+            }
+
+            Gson gson = new Gson();
+            this.listaEmpleados = Arrays.asList(gson.fromJson(sb.toString(), Empleado[].class));
+
+            conn.disconnect();
+        } catch (Exception ex) {
+
+        }
+
+        return this.listaEmpleados;
     }
 
     private void InicializarEventos() {
